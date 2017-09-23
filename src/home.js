@@ -56,8 +56,8 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({reducer}) => {
-    return {data} = reducer;
+const mapStateToProps = state => {
+  return { data: state.getIn(["reducer", "data"]) };
 };
 
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps)(Home);

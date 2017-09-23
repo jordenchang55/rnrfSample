@@ -10,7 +10,7 @@ const navigator = Actions.create(<Scene key="root" hideNavBar>
   <Scene key="page" component={Page}/>
 </Scene>);
 
-const ReduxRouter = connect((state) => ({ state: state.route }))(Router);
+const ReduxRouter = connect((state) => ({ state: state.get('route').toJS() }))(Router);
 // it is important to load reducers AFTER actions.create (so no import here)
 const reducers = require('./reducers').default;
 
@@ -18,7 +18,7 @@ export default
 class App extends React.Component {
     render() {
         return (
-            <Provider store={createStore(reducers, {})}>
+            <Provider store={createStore(reducers)}>
                 <ReduxRouter navigator={navigator} />
             </Provider>
         );

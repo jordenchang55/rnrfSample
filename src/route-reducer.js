@@ -1,15 +1,8 @@
-import {Reducer, ActionConst, Actions} from 'react-native-router-flux'
-
+import { Reducer, ActionConst, Actions } from "react-native-router-flux";
+import { fromJS } from "immutable";
 const defaultReducer = Reducer();
 
-export default (state, action) => {
-  console.log('Reducing action: ', action.type);
-  switch (action.type) {
-      case ActionConst.FOCUS:
-          console.log('FOCUS event fired with scene parameter: ', action.routeName);
-          return defaultReducer(state, action);
-
-      default:
-        return defaultReducer(state, action);
-  }
-}
+export default (state = fromJS(Actions.state), action) => {
+  const newState = fromJS(defaultReducer(state.toJS(), action));
+  return newState;
+};
